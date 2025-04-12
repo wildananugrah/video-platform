@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  smm-minio:
+    image: minio/minio
+    container_name: smm-minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: p@ssw0rd
+    volumes:
+      - ./minio_data:/data
+    networks:
+      app-net: {}
+networks:
+  app-net:
+    external: true
+    name: "video-platform-net"

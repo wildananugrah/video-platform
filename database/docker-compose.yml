@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+      
+  video-platform-db:
+    image: postgres:alpine
+    container_name: video-platform-db
+    ports:
+      - "5010:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - ./video-platform-db:/var/lib/postgresql/data
+    networks:
+      app-net: {}
+
+networks:
+  app-net:
+    external: true
+    name: "video-platform-net"
